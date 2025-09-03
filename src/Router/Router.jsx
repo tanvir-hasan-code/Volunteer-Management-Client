@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
         <span class="loader"></span>
       </div>
     ),
-    errorElement: <span>This Page is Error</span>,
+    // errorElement: <span>This Page is Error</span>,
     children: [
       {
         index: true,

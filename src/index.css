@@ -3,10 +3,11 @@
 
 
 nav > a.active{
-  color: red
+  color: blue;
+  border-bottom: 3px solid blue;
 }
 
-
+/* Loading Animation */
 .loader {
   width: 48px;
   height: 48px;
@@ -37,3 +38,4 @@ nav > a.active{
     transform: rotate(360deg);
   }
 } 
+

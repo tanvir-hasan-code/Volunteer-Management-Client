@@ -1,13 +1,42 @@
 import React from "react";
 import { Link, NavLink } from "react-router";
+import "./Navbar.css";
+import useAuth from "../../../Hooks/Auth/useAuth";
+import { PiSignOutBold } from "react-icons/pi";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, signOutUser } = useAuth();
+
   const NavbarOption = (
     <nav className="grid space-y-1 lg:flex lg:space-y-0 lg:space-x-5">
-      <NavLink to={'/'}>Home</NavLink>
-      <NavLink to={'/allVolunteerPosts'}>All volunteer Need posts</NavLink>
+      <NavLink to={"/"}>Home</NavLink>
+      <NavLink to={"/allVolunteerPosts"}>All volunteer Need posts</NavLink>
     </nav>
   );
+
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "SignOut User Successfully!",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+      })
+      .catch(() => {
+      Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "User Not SignOut",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+    })
+  }
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -37,15 +66,56 @@ const Navbar = () => {
             {NavbarOption}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Volunify</a>
+        <div className="glowing-container">
+          <a href="/" className="btn btn-ghost text-xl">
+            <span className="text-3xl font-bold text-blue-600 rotate-rgb">
+              ᐯOᒪᑌᑎIᖴY
+            </span>
+          </a>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{NavbarOption}</ul>
       </div>
-      <div className="navbar-end flex gap-3">
-        <Link to={'/login'}><button className="btn btn-primary btn-sm md:btn-md">Login</button></Link>
-        <Link to={'/register'}><button className="btn btn-success btn-sm md:btn-md">Register</button></Link>
-      </div>
+      
+        {user? <div className="navbar-end">
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button">
+              <div className="avatar ">
+                <div className="ring-primary ring-offset-base-100 w-14 rounded-full ring-2 ring-offset-2">
+                  <img src={user.photoURL} />
+                </div>
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+              <a className="text-xl font-semibold">{user.displayName}</a>
+              </li>
+              <li>
+              <a className="text-blue-500">{user.email}</a>
+              </li>
+            <div>
+              <button onClick={handleSignOut} className="btn w-full btn-error">
+                SignOut <PiSignOutBold/>
+              </button>
+              </div>
+            </ul>
+          </div>
+        </div>: <div className="navbar-end flex gap-3">
+          <Link to={"/login"}>
+            <button className="btn btn-primary btn-sm md:btn-md">Login</button>
+          </Link>
+          <Link to={"/register"}>
+            <button className="btn btn-success btn-sm md:btn-md">
+              Register
+            </button>
+          </Link>
+        </div>}
+      
+      
     </div>
   );
 };
