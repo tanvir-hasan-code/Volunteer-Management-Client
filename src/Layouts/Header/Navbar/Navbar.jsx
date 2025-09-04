@@ -39,7 +39,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-amber-100 shadow-sm root-font lg:px-5">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -67,8 +67,9 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="glowing-container">
-          <a href="/" className="btn btn-ghost text-xl">
-            <span className="text-3xl font-bold text-blue-600 rotate-rgb">
+          <a href="/" className="btn btn-ghost text-xl pl-0">
+            <img className="hidden md:block  object-cover rounded-full w-10" src="https://i.ibb.co.com/DDnLCLmv/Screenshot-2.png" alt="Company-Logo" />
+            <span className="text-3xl font-extrabold text-blue-600 rotate-rgb">
               ᐯOᒪᑌᑎIᖴY
             </span>
           </a>

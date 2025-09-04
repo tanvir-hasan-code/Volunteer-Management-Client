@@ -11,10 +11,10 @@ nav > a.active{
 .loader {
   width: 48px;
   height: 48px;
-  border: 2px solid #FFF;
   border-radius: 50%;
   display: inline-block;
   position: relative;
+  border: 2px solid #FF3D00;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
@@ -22,12 +22,12 @@ nav > a.active{
   content: '';  
   box-sizing: border-box;
   position: absolute;
-  left: 50%;
-  top: 0;
-  background: #FF3D00;
-  width: 3px;
-  height: 24px;
-  transform: translateX(-50%);
+  left: 4px;
+  top: 4px;
+  border: 2px solid #FFF;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
 }
     
 @keyframes rotation {
@@ -39,3 +39,11 @@ nav > a.active{
   }
 } 
 
+/* Fonts Link */
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+
+.root-font{
+  font-family: "Syncopate", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
