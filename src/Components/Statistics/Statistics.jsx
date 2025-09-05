@@ -80,8 +80,8 @@ const Statistics = () => {
         <h2 className="text-3xl font-bold mb-8 playfair-font text-white">
           Our Impact
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-6 justify-center gap-3 px-3 md:px-0 md:gap-8">
-          {stats.map((stat, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 justify-center gap-3 px-3 md:px-0 md:gap-8">
+          {stats.map((stat) => (
             <div
               key={stat.id}
               className="bg-blue-500 text-white p-6 rounded-xl shadow-lg min-w-[150px]"

@@ -6,18 +6,18 @@ const Newsletter = () => {
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.focus();
+      inputRef.current.focus({ preventScroll: true });
     }
   }, []);
 
   const handleBlur = () => {
     setTimeout(() => {
-      inputRef.current?.focus();
+      inputRef.current?.focus({ preventScroll: true });
     }, 0);
   };
 
   return (
-    <div className="bg-[#568F87] py-1 root-font">
+    <div className="bg-[#568F87] px-5 py-1 root-font">
       <motion.div
         className="w-full md:w-11/12 mx-auto my-12 bg-gradient-to-r from-blue-600 to-indigo-600 p-8 rounded-xl text-center"
         initial={{ opacity: 0, y: 50 }}
