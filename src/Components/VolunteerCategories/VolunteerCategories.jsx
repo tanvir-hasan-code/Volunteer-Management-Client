@@ -31,7 +31,7 @@ const VolunteerCategories = () => {
               initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.2 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             >
               <div className="text-4xl mb-2">{cat.icon}</div>
               <h3 className="text-lg font-semibold">{cat.name}</h3>

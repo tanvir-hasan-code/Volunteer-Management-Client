@@ -5,6 +5,7 @@ import VolunteerCategories from '../../Components/VolunteerCategories/VolunteerC
 import CallToAction from '../../Components/CallToAction/CallToAction';
 import Testimonials from '../../Components/Testimonials/Testimonials';
 import Statistics from '../../Components/Statistics/Statistics';
+import Events from '../../Components/Events/Events';
 
 
 
@@ -16,7 +17,8 @@ const Home = () => {
 			<VolunteerCategories />
 			<CallToAction />
 			<Testimonials />
-			<Statistics/>
+			<Statistics />
+			<Events/>
 		</div>
 	);
 };
