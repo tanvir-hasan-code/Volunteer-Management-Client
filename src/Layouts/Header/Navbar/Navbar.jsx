@@ -39,7 +39,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="navbar bg-amber-100 shadow-sm root-font lg:px-5">
+    <div className="navbar bg-[#FFF5F2] shadow-sm root-font lg:px-5">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -90,7 +90,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-auto p-2 shadow-sm"
             >
               <li>
               <a className="text-xl font-semibold">{user.displayName}</a>

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Empowering Communities Together",
+    "description": "Join Volunify to connect with passionate volunteers and create lasting change in local communities.",
+    "image": "https://i.ibb.co/SXg4Vt2/banner1.jpg",
+    "link": "/communities"
+  },
+  {
+    "id": 2,
+    "title": "Discover Volunteer Opportunities",
+    "description": "Explore hundreds of opportunities to make a difference—choose projects that match your passion and skills.",
+    "image": "https://i.ibb.co/Ms3PGcc/banner2.jpg",
+    "link": "/opportunities"
+  },
+  {
+    "id": 3,
+    "title": "Support Social Causes You Care About",
+    "description": "From education to environment—find causes close to your heart and take meaningful action today.",
+    "image": "https://i.ibb.co/Dg7JmPS/banner3.jpg",
+    "link": "/causes"
+  },
+  {
+    "id": 4,
+    "title": "Build Skills While Making an Impact",
+    "description": "Volunteering isn’t just about giving back—it’s about growing your network, learning, and personal development.",
+    "image": "https://i.ibb.co/tqJfwQ6/banner4.jpg",
+    "link": "/skills"
+  },
+  {
+    "id": 5,
+    "title": "Be a Part of Positive Change",
+    "description": "Your time and effort can transform lives. Together, we can create a better future for everyone.",
+    "image": "https://i.ibb.co/g9VKnJ3/banner5.jpg",
+    "link": "/change"
+  }
+]
