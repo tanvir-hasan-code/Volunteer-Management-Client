@@ -17,15 +17,15 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="bg-[#568F87] py-1">
+    <div className="bg-[#568F87] py-1 root-font">
       <motion.div
         className="w-full md:w-11/12 mx-auto my-12 bg-gradient-to-r from-blue-600 to-indigo-600 p-8 rounded-xl text-center"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.3 }}
       >
-        <h2 className="text-3xl font-bold text-white mb-4">
+        <h2 className="text-3xl font-bold text-white mb-4 playfair-font">
           Subscribe to Our Newsletter
         </h2>
         <p className="text-white mb-6">

@@ -7,6 +7,7 @@ import Testimonials from '../../Components/Testimonials/Testimonials';
 import Statistics from '../../Components/Statistics/Statistics';
 import Events from '../../Components/Events/Events';
 import Newsletter from '../../Components/Newsletter/Newsletter';
+import Partners from '../../Components/Blog/Blog';
 
 
 
@@ -20,7 +21,8 @@ const Home = () => {
 			<Testimonials />
 			<Statistics />
 			<Events />
-			<Newsletter/>
+			<Newsletter />
+			<Partners/>
 		</div>
 	);
 };
