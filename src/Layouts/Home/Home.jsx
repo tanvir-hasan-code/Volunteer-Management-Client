@@ -6,6 +6,7 @@ import CallToAction from '../../Components/CallToAction/CallToAction';
 import Testimonials from '../../Components/Testimonials/Testimonials';
 import Statistics from '../../Components/Statistics/Statistics';
 import Events from '../../Components/Events/Events';
+import Newsletter from '../../Components/Newsletter/Newsletter';
 
 
 
@@ -18,7 +19,8 @@ const Home = () => {
 			<CallToAction />
 			<Testimonials />
 			<Statistics />
-			<Events/>
+			<Events />
+			<Newsletter/>
 		</div>
 	);
 };

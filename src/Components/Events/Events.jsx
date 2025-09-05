@@ -32,7 +32,7 @@ const Events = () => {
               <p className="text-gray-600 mb-1">Date: {event.date}</p>
               <p className="text-gray-600 mb-4">Location: {event.location}</p>
               <a
-                href="/register"
+                href="/"
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
               >
                 Register
