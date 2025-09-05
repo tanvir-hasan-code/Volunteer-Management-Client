@@ -2,7 +2,7 @@ import React from "react";
 import { IoHome } from "react-icons/io5";
 import { TiArrowBack } from "react-icons/ti";
 import { Link, useNavigate } from "react-router";
-import { useTitle } from "../../Hooks/useTitle";
+import { useTitle } from "../Hooks/useTitle";
 
 const ErrorPage = () => {
 	useTitle('Error-Page')
