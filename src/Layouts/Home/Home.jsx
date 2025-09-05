@@ -9,6 +9,7 @@ import Events from '../../Components/Events/Events';
 import Newsletter from '../../Components/Newsletter/Newsletter';
 import Partners from '../../Components/Blog/Blog';
 import FAQ from '../../Components/FAQ/FAQ';
+import Action from '../../Components/Action/Action';
 
 
 
@@ -24,7 +25,8 @@ const Home = () => {
 			<Events />
 			<Newsletter />
 			<Partners />
-			<FAQ/>
+			<FAQ />
+			<Action/>
 		</div>
 	);
 };
