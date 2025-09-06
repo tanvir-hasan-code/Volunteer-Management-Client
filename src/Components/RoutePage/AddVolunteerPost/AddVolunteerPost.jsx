@@ -11,7 +11,8 @@ const AddVolunteerPost = () => {
 
     const form = e.target;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+	  const data = Object.fromEntries(formData.entries());
+	  data.post_owner = user.email;
     console.log(data, user);
   };
 
