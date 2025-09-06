@@ -92,7 +92,7 @@ const CallToAction = () => {
         </div>
         <div className="text-center mt-8">
           <motion.a
-            href="/"
+            href="/allVolunteerPosts"
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}

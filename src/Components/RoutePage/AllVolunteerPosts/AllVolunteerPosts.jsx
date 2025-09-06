@@ -29,9 +29,12 @@ const AllVolunteerPosts = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-11/12 mx-auto gap-5">
+	  <div className="bg-[#568F87]">
+		  <h1 className="text-xl md:text-2xl lg:text-3xl text-center playfair-font md:pt-5 ">All Volunteer Need Post</h1>
+		  <div className="grid grid-cols-1 py-10 md:grid-cols-2 lg:grid-cols-4 w-11/12 mx-auto gap-5">
 		  {volunteerPost.map((post, i) => <AllVolunteerPostCard post={post} key={i} />)}
     </div>
+	</div>
   );
 };
 

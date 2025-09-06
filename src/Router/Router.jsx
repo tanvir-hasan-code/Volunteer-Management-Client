@@ -8,6 +8,7 @@ import Register from "../Auth/Pages/Register/Register";
 import ErrorPage from "../Error/ErrorPage";
 import PrivateRoute from "../Auth/Private/PrivateRoute";
 import AddVolunteerPost from "../Components/RoutePage/AddVolunteerPost/AddVolunteerPost";
+import PostDetailsPage from "../Components/RoutePage/PostDetailsPage/PostDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: '/addVolunteerPost',
         element: <PrivateRoute><AddVolunteerPost/></PrivateRoute>
+      },
+      {
+        path: '/allVolunteerPosts/detailsPost/:id',
+        element: <PrivateRoute><PostDetailsPage/></PrivateRoute>
       },
     ],
   },
