@@ -10,7 +10,7 @@ const VolunteerCategories = () => {
   ];
 
   return (
-    <div className="bg-[#568F87] root-font pt-1 pb-3">
+    <div className="bg-[#568F87] root-font px-3 md:px-0 pt-1 pb-3">
       <div className="w-full md:w-11/12 mx-auto my-12">
         <h2 className="text-3xl text-white playfair-font font-bold text-center mb-8">
           <Typewriter

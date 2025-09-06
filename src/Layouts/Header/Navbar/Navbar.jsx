@@ -4,6 +4,7 @@ import "./Navbar.css";
 import useAuth from "../../../Hooks/Auth/useAuth";
 import { PiSignOutBold } from "react-icons/pi";
 import Swal from "sweetalert2";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
@@ -15,28 +16,27 @@ const Navbar = () => {
     </nav>
   );
 
-
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
         Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "SignOut User Successfully!",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
+          position: "center",
+          icon: "success",
+          title: "SignOut User Successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch(() => {
-      Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "User Not SignOut",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-    })
-  }
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "User Not SignOut",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
 
   return (
     <div className="navbar bg-[#FFF5F2] shadow-sm root-font lg:px-5">
@@ -68,7 +68,11 @@ const Navbar = () => {
         </div>
         <div className="glowing-container">
           <a href="/" className="btn btn-ghost text-xl pl-0">
-            <img className="hidden md:block  object-cover rounded-full w-10" src="https://i.ibb.co.com/DDnLCLmv/Screenshot-2.png" alt="Company-Logo" />
+            <img
+              className="hidden md:block  object-cover rounded-full w-10"
+              src="https://i.ibb.co.com/DDnLCLmv/Screenshot-2.png"
+              alt="Company-Logo"
+            />
             <span className="text-3xl font-extrabold text-blue-600 rotate-rgb">
               ᐯOᒪᑌᑎIᖴY
             </span>
@@ -78,13 +82,18 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{NavbarOption}</ul>
       </div>
-      
-        {user? <div className="navbar-end">
+
+      {user ? (
+        <div className="navbar-end">
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button">
               <div className="avatar ">
                 <div className="ring-primary ring-offset-base-100 w-14 rounded-full ring-2 ring-offset-2">
-                  <img src={user.photoURL} />
+                  <img
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content={user.displayName}
+                    src={user.photoURL}
+                  />
                 </div>
               </div>
             </div>
@@ -93,19 +102,24 @@ const Navbar = () => {
               className="dropdown-content menu bg-base-100 rounded-box z-1 w-auto p-2 shadow-sm"
             >
               <li>
-              <a className="text-xl font-semibold">{user.displayName}</a>
+                <a className="text-xl font-semibold">{user.displayName}</a>
               </li>
               <li>
-              <a className="text-blue-500">{user.email}</a>
+                <a className="text-blue-500">{user.email}</a>
               </li>
-            <div>
-              <button onClick={handleSignOut} className="btn w-full btn-error">
-                SignOut <PiSignOutBold/>
-              </button>
+              <div>
+                <button
+                  onClick={handleSignOut}
+                  className="btn w-full btn-error"
+                >
+                  SignOut <PiSignOutBold />
+                </button>
               </div>
             </ul>
           </div>
-        </div>: <div className="navbar-end flex gap-3">
+        </div>
+      ) : (
+        <div className="navbar-end flex gap-3">
           <Link to={"/login"}>
             <button className="btn btn-primary btn-sm md:btn-md">Login</button>
           </Link>
@@ -114,9 +128,10 @@ const Navbar = () => {
               Register
             </button>
           </Link>
-        </div>}
-      
-      
+        </div>
+      )}
+
+      <Tooltip id="my-tooltip" place="top" effect="solid" />
     </div>
   );
 };
