@@ -1,7 +1,7 @@
 import React from 'react';
 import useAxiosSecure from '../Hooks/useAxiosSecure/useAxiosSecure';
 
-const useAllVolunteerPostAPI = () => {
+const useMyVolunteerRequestAPI = () => {
 
 	const axiosSecure = useAxiosSecure();
 	const myRequestVolunteer = (email) => {
@@ -13,4 +13,4 @@ const useAllVolunteerPostAPI = () => {
 	};
 };
 
-export default useAllVolunteerPostAPI;
+export default useMyVolunteerRequestAPI;
