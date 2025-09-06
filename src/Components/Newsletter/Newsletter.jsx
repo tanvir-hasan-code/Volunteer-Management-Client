@@ -1,20 +1,7 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
 
 const Newsletter = () => {
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus({ preventScroll: true });
-    }
-  }, []);
-
-  const handleBlur = () => {
-    setTimeout(() => {
-      inputRef.current?.focus({ preventScroll: true });
-    }, 0);
-  };
+ 
 
   return (
     <div className="bg-[#568F87] px-5 py-1 root-font">
@@ -33,9 +20,7 @@ const Newsletter = () => {
         </p>
         <form className="flex flex-col sm:flex-row justify-center gap-4">
           <input
-            ref={inputRef}
             type="email"
-            onBlur={handleBlur}
             placeholder="Enter your email"
             className="p-3 rounded-lg flex-1 text-gray-900"
           />

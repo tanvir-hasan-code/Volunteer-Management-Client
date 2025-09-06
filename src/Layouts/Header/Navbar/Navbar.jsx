@@ -5,14 +5,34 @@ import useAuth from "../../../Hooks/Auth/useAuth";
 import { PiSignOutBold } from "react-icons/pi";
 import Swal from "sweetalert2";
 import { Tooltip } from "react-tooltip";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
+ 
 
   const NavbarOption = (
-    <nav className="grid space-y-1 lg:flex lg:space-y-0 lg:space-x-5">
+    <nav className="grid space-y-1 lg:flex lg:space-y-0 items-center lg:space-x-5">
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"/allVolunteerPosts"}>All volunteer Need posts</NavLink>
+      {user && (
+        <div className="dropdown">
+          <div tabIndex={0} >
+            <p className="flex items-center gap-1" >My-Profile  <IoIosArrowDown/></p>
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+          >
+            <li>
+              <NavLink to='/addVolunteerPost'>Add Volunteer Post</NavLink>
+            </li>
+            <li>
+              <NavLink to='/manageMyPost'>Manage My Posts</NavLink>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 
