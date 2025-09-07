@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Calendar, MapPin, Mail, User, UserPlus } from "lucide-react";
 import { useTitle } from "../../../Hooks/useTitle";
 import axios from "axios";
-import { data, useParams } from "react-router";
+import { useParams } from "react-router";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 
 const PostDetailsPage = () => {

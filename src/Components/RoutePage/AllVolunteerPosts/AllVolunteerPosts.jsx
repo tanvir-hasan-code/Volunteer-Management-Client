@@ -2,18 +2,40 @@ import React, { useEffect, useState } from "react";
 import { useTitle } from "../../../Hooks/useTitle";
 import axios from "axios";
 import AllVolunteerPostCard from "./AllVolunteerPostCard";
+import { Grid3x3, LucideTableOfContents } from "lucide-react";
+import useSearch from "../../../Hooks/useSearch/useSearch";
 
 const AllVolunteerPosts = () => {
   useTitle("All-Post");
-	const [volunteerPost, setVolunteerPost] = useState([]);
-	const [loading, setLoading] = useState(true)
+  const [volunteerPost, setVolunteerPost] = useState([]);
+  const [isTable, setTable] = useState(() => {
+    const stored = localStorage.getItem("isTable");
+    return stored ? stored === "true" : false;
+  });
+  const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const keyWordQuarry = useSearch(query, 400);
+  const isSearching = keyWordQuarry.trim() !== "";
+  const displayPosts = results.length > 0 ? results : volunteerPost;
+
+  useEffect(() => {
+    if (keyWordQuarry.trim() !== "") {
+      axios
+        .get(`http://localhost:3000/search?q=${keyWordQuarry}`)
+        .then((res) => setResults(res.data))
+        .catch((err) => console.log("Search Error:", err));
+    } else {
+      setResults([]);
+    }
+  }, [keyWordQuarry]);
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/allVolunteerPosts")
       .then((res) => {
-		  setVolunteerPost(res.data);
-		  setLoading(false)
+        setVolunteerPost(res.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("Volunteer Post loading Error", error);
@@ -28,13 +50,86 @@ const AllVolunteerPosts = () => {
     );
   }
 
+  // Table Button
+  const handleTableClick = () => {
+    setTable(true);
+    localStorage.setItem("isTable", "true");
+  };
+
+  // Grid button
+  const handleGridClick = () => {
+    setTable(false);
+    localStorage.setItem("isTable", "false");
+  };
+
   return (
-	  <div className="bg-[#568F87]">
-		  <h1 className="text-xl md:text-2xl lg:text-3xl text-center playfair-font md:pt-5 ">All Volunteer Need Post</h1>
-		  <div className="grid grid-cols-1 py-10 md:grid-cols-2 lg:grid-cols-4 w-11/12 mx-auto gap-5">
-		  {volunteerPost.map((post, i) => <AllVolunteerPostCard post={post} key={i} />)}
+    <div className="bg-[#568F87]">
+      <h1 className="text-2xl lg:text-3xl text-center playfair-font pt-4 md:pt-5  text-white font-bold">
+        All Volunteer Need Post
+      </h1>
+      <div className="flex justify-between w-11/12 mx-auto mt-5">
+        {/* Search Functionality  */}
+        <div>
+          <label className="input h-7 w-32 md:w-72 md:h-10">
+            <svg
+              className="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input
+              type="search"
+              required
+              placeholder="Search volunteers..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </label>
+        </div>
+        {/* Table and Grid  */}
+        <div className="flex gap-3 bg-white w-fit px-3 py-2 rounded-full">
+          <button
+            className={`${
+              isTable ? "" : "bg-gray-500 text-white p-1 rounded-3xl"
+            }`}
+            onClick={handleGridClick}
+          >
+            <Grid3x3 size={20} />
+          </button>
+          <button
+            className={`${
+              !isTable ? "" : "bg-gray-500 text-white p-1 rounded-3xl"
+            }`}
+            onClick={handleTableClick}
+          >
+            <LucideTableOfContents size={20} />
+          </button>
+        </div>
+      </div>
+      <div
+        className={`grid ${
+          isTable ? `grid-cols-1` : `grid-cols-1 md:grid-cols-2 lg:grid-cols-4`
+        } py-10  w-11/12 mx-auto gap-5`}
+      >
+        {isSearching && results.length === 0 ? (
+          <p className="text-center text-white col-span-4">No posts found</p>
+        ) : (
+          displayPosts.map((post, i) => (
+            <AllVolunteerPostCard post={post} key={i} isTable={isTable} />
+          ))
+        )}
+      </div>
     </div>
-	</div>
   );
 };
 

@@ -4,15 +4,15 @@ import { useTitle } from "../../../Hooks/useTitle";
 import useAuth from "../../../Hooks/Auth/useAuth";
 
 const AddVolunteerPost = () => {
-	useTitle('Post-Volunteer')
-	const { user } = useAuth();
+  useTitle("Post-Volunteer");
+  const { user } = useAuth();
   const handleAddVolunteerPost = (e) => {
     e.preventDefault();
 
     const form = e.target;
     const formData = new FormData(form);
-	  const data = Object.fromEntries(formData.entries());
-	  data.post_owner = user.email;
+    const data = Object.fromEntries(formData.entries());
+    data.post_owner = user.email;
     console.log(data, user);
   };
 
@@ -171,6 +171,11 @@ const AddVolunteerPost = () => {
             name="description"
             placeholder="Type Here"
           ></textarea>
+        </fieldset>
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+          <legend className="fieldset-legend">Volunteers Needed</legend>
+
+          <input type="number" name="volunteersNeeded" className="input" />
         </fieldset>
 
         {/* HR Info */}

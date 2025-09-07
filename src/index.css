@@ -2,6 +2,8 @@
 @plugin "daisyui";
 
 
+
+
 nav > a.active{
   color: blue;
   border-bottom: 3px solid blue;

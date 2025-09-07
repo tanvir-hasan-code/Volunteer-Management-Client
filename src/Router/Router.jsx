@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><AddVolunteerPost/></PrivateRoute>
       },
       {
-        path: '/allVolunteerPosts/detailsPost/:id',
+        path: '/allVolunteerPost/detailsPost/:id',
         element: <PrivateRoute><PostDetailsPage/></PrivateRoute>
       },
     ],
