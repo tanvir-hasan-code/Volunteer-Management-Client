@@ -2,6 +2,7 @@ import React from "react";
 import Swal from "sweetalert2";
 import { useTitle } from "../../../Hooks/useTitle";
 import useAuth from "../../../Hooks/Auth/useAuth";
+import axios from "axios";
 
 const AddVolunteerPost = () => {
   useTitle("Post-Volunteer");
@@ -11,9 +12,34 @@ const AddVolunteerPost = () => {
 
     const form = e.target;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    data.post_owner = user.email;
-    console.log(data, user);
+    const newNeedVolunteer = Object.fromEntries(formData.entries());
+    newNeedVolunteer.post_owner = user.email;
+
+    axios
+      .post("http://localhost:3000/addVolunteerPost", newNeedVolunteer)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Post Has been Submit Successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          form.reset()
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Your Post Not Submit!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
 
   return (

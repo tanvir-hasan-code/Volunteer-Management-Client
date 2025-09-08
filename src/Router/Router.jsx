@@ -9,6 +9,7 @@ import ErrorPage from "../Error/ErrorPage";
 import PrivateRoute from "../Auth/Private/PrivateRoute";
 import AddVolunteerPost from "../Components/RoutePage/AddVolunteerPost/AddVolunteerPost";
 import PostDetailsPage from "../Components/RoutePage/PostDetailsPage/PostDetailsPage";
+import ManageMyPost from "../Components/RoutePage/ManageMyPost/ManageMyPosts";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: '/allVolunteerPost/detailsPost/:id',
         element: <PrivateRoute><PostDetailsPage/></PrivateRoute>
+      },
+      {
+        path: '/manageMyPost',
+        element: <PrivateRoute><ManageMyPost/></PrivateRoute>
       },
     ],
   },
