@@ -21,7 +21,7 @@ const Register = () => {
           title: "User Create Successfully!",
           showConfirmButton: false,
           timer: 1500,
-        });
+        })
         navigate(from);
       })
       .catch((error) => {

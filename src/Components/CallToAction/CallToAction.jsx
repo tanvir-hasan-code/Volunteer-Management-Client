@@ -69,7 +69,6 @@ const CallToAction = () => {
           deleteSpeed={50}
           delaySpeed={10000}
         />
-          
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 justify-center gap-6">
           {orgs.map((org, i) => (

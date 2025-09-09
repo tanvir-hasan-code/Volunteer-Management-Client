@@ -59,7 +59,7 @@ const AddVolunteerPost = () => {
             placeholder="Title"
           />
 
-          <label className="label">Company</label>
+          <label className="label">Organizer</label>
           <input
             type="text"
             name="Organizer"

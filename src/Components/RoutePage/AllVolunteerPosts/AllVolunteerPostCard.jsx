@@ -22,13 +22,13 @@ const AllVolunteerPostCard = ({ post, isTable }) => {
         {post.title}
       </div>
       <div className="flex-1 flex items-center gap-1 text-blue-300">
-        <IoLocationSharp /> <small>{post.location}</small>
+        <IoLocationSharp /> <small>{post?.location}</small>
       </div>
       <div className="flex-1 text-xs md:text-sm">
         {post.volunteersNeeded} People
       </div>
       <div className="flex-1 text-xs md:text-sm">
-        Deadline: {post.applicationDeadline}
+        Deadline: {post?.applicationDeadline}
       </div>
       <div className="flex-1 text-right mt-2 md:mt-0">
         <NavLink
@@ -69,6 +69,7 @@ const AllVolunteerPostCard = ({ post, isTable }) => {
             </button>
           )}
         </p>
+        <div><p> Type: <span className="bg-blue-400 text-white px-1 rounded-full">{post?.type}</span></p></div>
 
         <div className="card-actions justify-between flex items-center">
           <p className="bg-orange-200 py-1 px-1 max-w-fit rounded-full">

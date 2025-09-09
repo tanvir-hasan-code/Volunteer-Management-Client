@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
 
@@ -42,14 +44,12 @@ nav > a.active{
 } 
 
 /* Fonts Link */
-@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-.root-font{
+/* .root-font{
   font-family: "Syncopate", sans-serif;
   font-weight: 400;
-  font-style: normal;
-}
+  font-style: normal; */
+/* } */
 
 .playfair-font {
   font-family: "Playfair Display", serif;

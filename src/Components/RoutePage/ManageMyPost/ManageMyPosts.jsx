@@ -1,18 +1,20 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { NavLink, Outlet, useLocation } from "react-router";
+import { useTitle } from "../../../Hooks/useTitle";
 
 const ManageMyPost = () => {
+  useTitle('Mange-Post')
+  const location = useLocation();
   const NavOption = (
     <nav className="flex justify-center items-center text-sm md:text-base gap-6 m-6 border-b-2 border-gray-300 pb-3">
       <NavLink
-        to="/manageMyPost/myCreatedPosts"
-        className={({ isActive }) =>
-          `px-4 py-2 rounded-md transition duration-300  ${
-            isActive
-              ? "bg-blue-500 text-white"
-              : "hover:bg-gray-100 text-gray-700"
-          }`
-        }
+        to="myCreatedPosts"
+        className={({ isActive }) => {
+          const active = isActive || location.pathname === "/manageMyPost";
+          return `px-4 py-2 rounded-md transition duration-300 ${
+            active ? "text-blue-500 font-bold underline" : "hover:bg-gray-100 text-gray-700"
+          }`;
+        }}
       >
         My Created Posts
       </NavLink>
@@ -24,7 +26,7 @@ const ManageMyPost = () => {
         className={({ isActive }) =>
           `px-4 py-2 rounded-md transition duration-300 ${
             isActive
-              ? "bg-blue-500 text-white"
+              ? "text-blue-500 font-bold underline"
               : "hover:bg-gray-100 text-gray-700"
           }`
         }
@@ -34,7 +36,11 @@ const ManageMyPost = () => {
     </nav>
   );
 
-  return <div>{NavOption}</div>;
+  return (<>
+      {NavOption}
+    <Outlet />
+  </>
+  );
 };
 
 export default ManageMyPost;

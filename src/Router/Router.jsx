@@ -10,6 +10,8 @@ import PrivateRoute from "../Auth/Private/PrivateRoute";
 import AddVolunteerPost from "../Components/RoutePage/AddVolunteerPost/AddVolunteerPost";
 import PostDetailsPage from "../Components/RoutePage/PostDetailsPage/PostDetailsPage";
 import ManageMyPost from "../Components/RoutePage/ManageMyPost/ManageMyPosts";
+import MyCreatedPosts from "../Components/RoutePage/ManageMyPost/MyCreatedPosts/MyCreatedPosts";
+import MyRequestedPosts from "../Components/RoutePage/ManageMyPost/MyRequestedPosts/MyRequestedPosts";
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +50,21 @@ export const router = createBrowserRouter([
       },
       {
         path: '/manageMyPost',
-        element: <PrivateRoute><ManageMyPost/></PrivateRoute>
+        element: <PrivateRoute><ManageMyPost /></PrivateRoute>,
+        children: [
+          {
+            index: true,
+        element: <PrivateRoute><MyCreatedPosts/></PrivateRoute>
+          },
+          {
+            path: '/manageMyPost/myCreatedPosts',
+        element: <PrivateRoute><MyCreatedPosts/></PrivateRoute>
+      },
+      {
+        path: '/manageMyPost/myRequestedPosts',
+        element: <PrivateRoute><MyRequestedPosts/></PrivateRoute> 
+      }
+        ]
       },
     ],
   },

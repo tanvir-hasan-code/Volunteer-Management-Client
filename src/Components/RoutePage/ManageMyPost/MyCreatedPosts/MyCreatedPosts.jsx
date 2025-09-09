@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { Suspense } from "react";
+import useAuth from "../../../../Hooks/Auth/useAuth";
+import useCreateAPI from "../../../../API/useCreateAPI";
+import MyCreatedPostList from "./MyCreatedPostList";
 
 const MyCreatedPosts = () => {
-	return (
-		<div>
-			<h1>hello From My Created Posted</h1>
-		</div>
-	);
+  const { user } = useAuth();
+  const { createdPost } = useCreateAPI();
+
+  return (
+    <div>
+      <Suspense
+        fallback={
+          <div className="w-full flex items-center justify-center bg-[#1b2227] min-h-screen">
+            <span className="loader"></span>
+          </div>
+        }
+      >
+        <MyCreatedPostList createdPost={createdPost(user?.email)} />
+      </Suspense>
+    </div>
+  );
 };
 
 export default MyCreatedPosts;
