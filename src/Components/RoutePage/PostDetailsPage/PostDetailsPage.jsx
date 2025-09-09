@@ -6,12 +6,16 @@ import { Link, useNavigate, useParams } from "react-router";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { FaRegHandshake } from "react-icons/fa";
 import { IoArrowBack } from "react-icons/io5";
+import useAuth from "../../../Hooks/Auth/useAuth";
+import Swal from "sweetalert2";
 
 const PostDetailsPage = () => {
   useTitle("Details-page");
+  const { user } = useAuth();
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isModalShow, setIsModalShow] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,6 +30,45 @@ const PostDetailsPage = () => {
       });
   }, []);
 
+  const handleRequestVolunteer = (e) => {
+    e.preventDefault();
+    const postId = post._id;
+    const form = e.target;
+    const formData = new FormData(form);
+    const reqData = Object.fromEntries(formData.entries());
+    reqData.postId = postId;
+    try {
+      setLoading(true);
+      axios
+        .post(`http://localhost:3000/volunteerRequest`, reqData)
+        .then((res) => {
+          if (res.data.insertedId) {
+            setIsModalShow(false);
+            Swal.fire({
+              title: "Requested!",
+              text: "This Post is Requested Successfully.",
+              icon: "success",
+              timer: 1500,
+              showConfirmButton: false,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          Swal.fire({
+            title: "Failed!",
+            text: "Fail Request Post.",
+            icon: "error",
+            timer: 1500,
+          });
+        });
+    } catch (err) {
+      console.error("Request Error", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="w-full flex items-center justify-center bg-[#1b2227] min-h-screen">
@@ -36,7 +79,14 @@ const PostDetailsPage = () => {
 
   return (
     <div className="mt-5 mx-5">
-      <button onClick={()=>{navigate(-1)}} className="btn btn-soft btn-info"><IoArrowBack size={20}/> Back</button>
+      <button
+        onClick={() => {
+          navigate(-1);
+        }}
+        className="btn btn-soft btn-info"
+      >
+        <IoArrowBack size={20} /> Back
+      </button>
       <div className="min-h-screen flex items-center">
         <div className="max-w-md h-fit mx-auto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
           <img
@@ -77,12 +127,77 @@ const PostDetailsPage = () => {
               </div>
             </div>
 
-            <button className="mt-5 bg-blue-600 text-white px-4 py-2 rounded-lg flex gap-2 justify-center items-center hover:bg-blue-700 transition duration-200 w-full">
+            <button
+              onClick={() => setIsModalShow(true)}
+              className="mt-5 bg-blue-600 text-white px-4 py-2 rounded-lg flex gap-2 justify-center items-center hover:bg-blue-700 transition duration-200 w-full"
+            >
               Be a Volunteer <FaRegHandshake />
             </button>
           </div>
         </div>
       </div>
+      {isModalShow && (
+        <div className="modal modal-open">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">Requested Volunteer INFO!</h3>
+            <div className="card bg-base-100 shrink-0 shadow-2xl">
+              <div className="card-body">
+                <form onSubmit={handleRequestVolunteer} className="fieldset">
+                  <label className="label">Name</label>
+                  <input
+                    type="text"
+                    name="displayName"
+                    className="input w-full"
+                    readOnly
+                    defaultValue={user?.displayName}
+                    placeholder="Email"
+                  />
+                  <label className="label">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    className="input w-full"
+                    readOnly
+                    defaultValue={user?.email}
+                    placeholder="Email"
+                  />
+                  <label className="label">Photo URL</label>
+                  <input
+                    type="text"
+                    name="photoURL"
+                    defaultValue={user.photoURL}
+                    className="input w-full "
+                    placeholder="Password"
+                    readOnly
+                  />
+                  <label className="label">Status</label>
+                  <input
+                    type="text"
+                    name="status"
+                    defaultValue={"Request"}
+                    className="input w-full"
+                    placeholder="Password"
+                    readOnly
+                  />
+                  <div className="flex mt-2 items-center justify-between">
+                    <button
+                      onClick={() => setIsModalShow(false)}
+                      className="btn btn-warning"
+                    >
+                      Close
+                    </button>
+                    <input
+                      className="btn btn-primary"
+                      type="submit"
+                      value="Request Now"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
