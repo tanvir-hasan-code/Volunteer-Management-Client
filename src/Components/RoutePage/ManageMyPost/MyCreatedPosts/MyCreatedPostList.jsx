@@ -35,24 +35,45 @@ const MyCreatedPostList = ({ createdPost }) => {
     }
   };
 
-  const handleUpdatePost = (e) => {
+  const handleUpdatePost = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const updateData = Object.fromEntries(formData.entries());
     try {
-      axios
-        .put(
-          `http://localhost:3000/allVolunteerPosts/detailsPost/${selectPost._id}`,
-          updateData
-        )
-        .then((res) => {
-          if (res.data) {
-            setIsModal(false);
-          }
+      setLoading(true);
+      const res = await axios.put(
+        `http://localhost:3000/allVolunteerPosts/detailsPost/${selectPost._id}`,
+        updateData
+      );
+
+      if (res.data.modifiedCount > 0) {
+        const updatedRes = await axios.get(
+          `http://localhost:3000/allVolunteerPosts/detailsPost/${selectPost._id}`
+        );
+        const updatedPost = updatedRes.data;
+
+        setPost((prevPosts) =>
+          prevPosts.map((p) => (p._id === updatedPost._id ? updatedPost : p))
+        );
+
+        setIsModal(false);
+
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Post Updated Successfully.",
+          timer: 1500,
+          showConfirmButton: false,
         });
+      }
     } catch (err) {
-      console.error("Updateing Error", err);
+      console.error("Update Error", err);
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "Failed to update post.",
+      });
     } finally {
       setLoading(false);
     }
