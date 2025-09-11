@@ -14,6 +14,7 @@ const AddVolunteerPost = () => {
     const formData = new FormData(form);
     const newNeedVolunteer = Object.fromEntries(formData.entries());
     newNeedVolunteer.post_owner = user.email;
+    newNeedVolunteer.volunteersNeeded = Number(newNeedVolunteer.volunteersNeeded);
 
     axios
       .post("http://localhost:3000/addVolunteerPost", newNeedVolunteer)

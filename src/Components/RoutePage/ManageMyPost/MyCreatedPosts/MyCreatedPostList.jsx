@@ -12,8 +12,16 @@ const MyCreatedPostList = ({ createdPost }) => {
 
   const [post, setPost] = useState(posts);
   const [isModal, setIsModal] = useState(false);
+  const [reqModal, setReqModal] = useState(false);
   const [selectPost, setSelectPost] = useState(null);
+  const [req, setReq] = useState([]);
   const [loading, setLoading] = useState(false);
+  const reqModalOpen = (_id) => {
+    axios.get(`http://localhost:3000/request/${_id}`).then((res) => {
+      setReq(res.data);
+      setReqModal(true);
+    });
+  };
 
   const openModal = async (_id) => {
     setLoading(true);
@@ -40,6 +48,8 @@ const MyCreatedPostList = ({ createdPost }) => {
     const form = e.target;
     const formData = new FormData(form);
     const updateData = Object.fromEntries(formData.entries());
+    updateData.volunteersNeeded = Number(updateData.volunteersNeeded);
+    console.log(typeof updateData.volunteersNeeded);
     try {
       setLoading(true);
       const res = await axios.put(
@@ -115,6 +125,17 @@ const MyCreatedPostList = ({ createdPost }) => {
     });
   };
 
+  const handleStatusChange = (e, _id) => {
+    console.log(e.target.value, _id);
+    axios
+      .patch(`http://localhost:3000/myCreatedPosts/${_id}`, {
+        status: e.target.value,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
+
   if (loading) {
     return (
       <div className="w-full flex items-center justify-center bg-[#1b2227] min-h-screen">
@@ -147,11 +168,14 @@ const MyCreatedPostList = ({ createdPost }) => {
                   className="hover:bg-gray-100 transition duration-200 text-sm md:text-base"
                 >
                   <td>{i + 1}.</td>
-                  <td className="p-3 text-center">{p.title}</td>
-                  <td className="p-3 text-center">{p.type}</td>
-                  <td className="p-3 text-center">10</td>
+                  <td className="p-3 text-center">{p?.title}</td>
+                  <td className="p-3 text-center">{p?.type}</td>
+                  <td className="p-3 text-center">{p?.request_count || 0}</td>
                   <td className="flex gap-1 justify-end">
-                    <button className="p-3 btn btn-info btn-xs lg:btn-md my-3">
+                    <button
+                      onClick={() => reqModalOpen(p._id)}
+                      className="p-3 btn btn-info btn-xs lg:btn-md my-3"
+                    >
                       See Request
                     </button>
                     <button
@@ -179,6 +203,7 @@ const MyCreatedPostList = ({ createdPost }) => {
           </tbody>
         </table>
       </div>
+
       {isModal && (
         <div className="modal modal-open">
           <div className="modal-box">
@@ -419,6 +444,72 @@ const MyCreatedPostList = ({ createdPost }) => {
             )}
           </div>
         </div>
+      )}
+      {reqModal && (
+        <dialog className="modal modal-open">
+          <div className="modal-box w-11/12 max-w-5xl">
+            <h1 className="text-center md:text-2xl font-bold">
+              Requested Volunteer Your Post
+            </h1>
+            <div className="overflow-x-auto">
+              <table className="table">
+                {/* head */}
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Name & Email</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* row 1 */}
+                  {req.map((re, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle h-12 w-12">
+                              <img src={re?.photoURL} alt="Profile-picture" />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="font-bold">{re?.displayName}</div>
+                            <div className="text-sm opacity-50">
+                              {re?.email}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <th>
+                        <select
+                          onChange={(e) => handleStatusChange(e, re?._id)}
+                          defaultValue={re?.status || "Pending"}
+                          className="select w-auto md:w-full select-info"
+                        >
+                          <option disabled={true}>Request</option>
+                          <option value="Accept">Accept</option>
+                          <option value="Review">Review</option>
+                          <option value="Waiting">Waiting</option>
+                          <option value="Reject">Reject</option>
+                          <option value="Contacted">Contacted</option>
+                          <option value="Completed">Completed</option>
+                        </select>
+                      </th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="modal-action">
+              <form method="dialog">
+                <button onClick={() => setReqModal(false)} className="btn">
+                  Close
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       )}
     </div>
   );

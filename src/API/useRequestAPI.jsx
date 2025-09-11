@@ -5,7 +5,7 @@ const useMyVolunteerRequestAPI = () => {
 
 	const axiosSecure = useAxiosSecure();
 	const myRequestVolunteer = (email) => {
-		return axiosSecure.get(`/requestVolunteer?email=${email}`).then(res => res.data);
+		return axiosSecure.get(`/myRequestedPosts?email=${email}`).then(res => res.data);
 	}
 
 	return {

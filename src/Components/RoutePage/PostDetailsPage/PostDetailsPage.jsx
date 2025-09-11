@@ -15,10 +15,12 @@ const PostDetailsPage = () => {
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(false);
   const [isModalShow, setIsModalShow] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:3000/allVolunteerPosts/detailsPost/${id}`)
       .then((res) => {
@@ -27,43 +29,56 @@ const PostDetailsPage = () => {
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
-  }, []);
+  }, [id, refresh]);
 
-  const handleRequestVolunteer = (e) => {
+  const handleRequestVolunteer = async (e) => {
     e.preventDefault();
     const postId = post._id;
     const form = e.target;
     const formData = new FormData(form);
     const reqData = Object.fromEntries(formData.entries());
     reqData.postId = postId;
+
     try {
       setLoading(true);
-      axios
-        .post(`http://localhost:3000/volunteerRequest`, reqData)
-        .then((res) => {
-          if (res.data.insertedId) {
-            setIsModalShow(false);
-            Swal.fire({
-              title: "Requested!",
-              text: "This Post is Requested Successfully.",
-              icon: "success",
-              timer: 1500,
-              showConfirmButton: false,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          Swal.fire({
-            title: "Failed!",
-            text: "Fail Request Post.",
-            icon: "error",
-            timer: 1500,
-          });
+      const requestRes = await axios.post(
+        `http://localhost:3000/volunteerRequest`,
+        reqData
+      );
+
+      if (requestRes.data.insertedId) {
+        setIsModalShow(false);
+
+        const patchRes = await axios.patch(
+          `http://localhost:3000/allVolunteerPosts/detailsPost/${postId}`
+        );
+
+        setRefresh((prev) => !prev);
+
+        const updatedPost = patchRes.data;
+        setPost((prev) => ({
+          ...prev,
+          volunteersNeeded: updatedPost.volunteersNeeded,
+        }));
+
+        Swal.fire({
+          title: "Requested!",
+          text: "This Post is Requested Successfully.",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
         });
-    } catch (err) {
-      console.error("Request Error", err);
+      }
+    } catch (error) {
+      console.error("Request Error:", error);
+      Swal.fire({
+        title: "Failed!",
+        text: "Fail Request Post.",
+        icon: "error",
+        timer: 1500,
+      });
     } finally {
       setLoading(false);
     }
@@ -126,10 +141,20 @@ const PostDetailsPage = () => {
                 <p>{post?.volunteersNeeded} Volunteers Needed</p>
               </div>
             </div>
+            {post.volunteersNeeded <= 0 && (
+              <p className="text-red-600 font-bold text-center mt-2">
+                Sorry! No more volunteers needed for this post.
+              </p>
+            )}
 
             <button
               onClick={() => setIsModalShow(true)}
-              className="mt-5 bg-blue-600 text-white px-4 py-2 rounded-lg flex gap-2 justify-center items-center hover:bg-blue-700 transition duration-200 w-full"
+              className={`mt-5 bg-blue-600  text-white px-4 py-2 rounded-lg flex gap-2 justify-center items-center hover:bg-blue-700 transition duration-200 w-full ${
+                post.volunteersNeeded <= 0
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              }`}
+              disabled={post.volunteersNeeded <= 0}
             >
               Be a Volunteer <FaRegHandshake />
             </button>
