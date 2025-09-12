@@ -37,6 +37,7 @@ const MyCreatedPostList = ({ createdPost }) => {
         title: "Failed!",
         text: "Error Loading Post.",
         icon: "error",
+        showConfirmButton: false,
       });
     } finally {
       setLoading(false);
@@ -132,7 +133,26 @@ const MyCreatedPostList = ({ createdPost }) => {
         status: e.target.value,
       })
       .then((res) => {
-        console.log(res.data);
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "Status Updated Successfully.",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Failed!",
+            text: "Status Update Fail.",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+        }
       });
   };
 

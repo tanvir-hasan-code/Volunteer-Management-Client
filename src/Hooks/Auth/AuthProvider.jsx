@@ -13,6 +13,26 @@ import { auth } from "../../Auth/Firebase/Firebase.init";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState('light')
+
+
+    const toggleTheme = () => {
+    const newTheme = theme === 'light' ? "dark" : 'light';
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
+    }
+  
+    useEffect(() => {
+    const saveTheme = localStorage.getItem('theme');
+    if (saveTheme) {
+      setTheme(saveTheme)
+    }
+    }, [])
+  
+  
+    useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme)
+  }, [theme])
 
   const provider = new GoogleAuthProvider();
 
@@ -48,7 +68,9 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     loading,
 	  setLoading,
-	signOutUser,
+    signOutUser,
+    theme, 
+    toggleTheme
   };
 
   if (loading) {

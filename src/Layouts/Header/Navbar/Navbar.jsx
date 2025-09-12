@@ -6,6 +6,7 @@ import { PiSignOutBold } from "react-icons/pi";
 import Swal from "sweetalert2";
 import { Tooltip } from "react-tooltip";
 import { IoIosArrowDown } from "react-icons/io";
+import ThemeChange from "../../../Theme/ThemeChange";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
@@ -103,6 +104,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{NavbarOption}</ul>
       </div>
 
+        
       {user ? (
         <div className="navbar-end">
           <div className="dropdown dropdown-end">
@@ -139,7 +141,7 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div className="navbar-end flex gap-3">
+          <div className="navbar-end flex gap-3">
           <Link to={"/login"}>
             <button className="btn btn-primary btn-sm md:btn-md">Login</button>
           </Link>
@@ -148,6 +150,7 @@ const Navbar = () => {
               Register
             </button>
           </Link>
+            <ThemeChange />
         </div>
       )}
 

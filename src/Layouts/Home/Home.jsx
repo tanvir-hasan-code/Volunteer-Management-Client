@@ -10,6 +10,7 @@ import Newsletter from '../../Components/Newsletter/Newsletter';
 import FAQ from '../../Components/FAQ/FAQ';
 import Action from '../../Components/Action/Action';
 import Blog from '../../Components/Blog/Blog';
+import VolunteerNeedsNow from '../../Components/VolunteerNeedsNow/VolunteerNeedsNow';
 
 
 
@@ -18,6 +19,7 @@ const Home = () => {
 	return (
 		<div>
 			<Banner />
+			<VolunteerNeedsNow/>
 			<VolunteerCategories />
 			<CallToAction />
 			<Statistics />

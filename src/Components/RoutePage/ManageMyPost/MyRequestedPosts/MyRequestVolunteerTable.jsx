@@ -1,13 +1,14 @@
 import React, { use, useState } from "react";
 import useCancelRequestAPI from "../../../../API/useCancelRequestAPI";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
 	const requestPost = use(myRequestVolunteer) || [];
 	const [request, setRequest] = useState(requestPost);
 	const { cancelRequestPromise } = useCancelRequestAPI();
 
-  const handleDeleteReq = (_id) => {
+  const handleDeleteReq = (_id, postId) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -23,6 +24,9 @@ const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
 			  if (res?.data?.deletedCount) {
 				  const remainder = request.filter(p => p._id !== _id);
 				  setRequest(remainder);
+
+				  axios.patch(`http://localhost:3000/updateRequestCount/${postId}`).then(res => res.data).catch(err => console.log(err))
+
               Swal.fire({
                 title: "Deleted!",
 				  text: "Your Post has been deleted.",
@@ -82,7 +86,7 @@ const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
                 <td>{req.status}</td>
                 <th>
                   <button
-                    onClick={() => handleDeleteReq(req._id)}
+                    onClick={() => handleDeleteReq(req._id, req.postId)}
                     className="btn btn-error btn-xs md:btn-md"
                   >
                     Cancel{" "}
