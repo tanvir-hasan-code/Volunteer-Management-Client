@@ -4,10 +4,11 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Tooltip } from "react-tooltip";
+import useAuth from "../../../Hooks/Auth/useAuth";
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
+  const { theme } = useAuth();
 
   useEffect(() => {
     fetch("/banner.json")
@@ -26,7 +27,7 @@ const Banner = () => {
   }
 
   return (
-    <div className="w-full bg-[#F5BABB]">
+    <div className={`w-full ${theme === 'light'? 'bg-[#F5BABB]': ''}`}>
       <div className="w-full md:w-11/12 root-font  mx-auto py-4">
         <Swiper
           spaceBetween={30}

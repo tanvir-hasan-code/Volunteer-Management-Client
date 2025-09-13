@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const blogs = [
   {
@@ -22,22 +23,25 @@ const blogs = [
 ];
 
 const Blog = () => {
+
+  const { theme } = useAuth();
+
   return (
-    <div className="bg-[#568F87] root-font py-1">
+    <div className={`${theme === 'light'? "bg-[#568F87]": ""} root-font py-1`}>
       <div className="w-full md:w-11/12 mx-auto my-12">
         <h2 className="text-3xl font-bold text-center mb-8 playfair-font text-white">Latest Articles</h2>
         <div className="flex flex-wrap justify-center gap-6">
           {blogs.map((b, i) => (
             <motion.div
               key={b.id}
-              className="bg-white shadow-lg rounded-xl p-6 max-w-sm hover:scale-105 transition-transform"
+              className={`${theme === 'light'? 'bg-white': "bg-gray-700"} shadow-lg rounded-xl p-6 max-w-sm hover:scale-105 transition-transform`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.2 }}
               viewport={{ once: true, amount: 0.3 }}
             >
               <h3 className="font-semibold text-lg mb-2">{b.title}</h3>
-              <p className="text-gray-600 mb-4">{b.snippet}</p>
+              <p className={`mb-4 ${theme === 'light'? "text-gray-600": ""}`}>{b.snippet}</p>
               <a href={b.link} className="text-blue-600 hover:underline">
                 Read More →
               </a>

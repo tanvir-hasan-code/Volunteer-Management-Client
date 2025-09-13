@@ -8,7 +8,7 @@ import { X } from "lucide-react";
 
 const MyCreatedPostList = ({ createdPost }) => {
   const posts = use(createdPost) || [];
-  const { user } = useAuth();
+  const { user, theme } = useAuth();
 
   const [post, setPost] = useState(posts);
   const [isModal, setIsModal] = useState(false);
@@ -185,7 +185,7 @@ const MyCreatedPostList = ({ createdPost }) => {
               post.map((p, i) => (
                 <tr
                   key={i}
-                  className="hover:bg-gray-100 transition duration-200 text-sm md:text-base"
+                  className={`${theme === "light"? "bg-white hover:bg-gray-100": "hover:bg-gray-900"} bg-gray-700 transition duration-200 text-sm md:text-base`}
                 >
                   <td>{i + 1}.</td>
                   <td className="p-3 text-center">{p?.title}</td>

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { NavLink } from "react-router";
+import useAuth from "../../../Hooks/Auth/useAuth";
 
 const AllVolunteerPostCard = ({ post, isTable }) => {
   const [showDec, setShowDec] = useState(false);
+  const { theme } = useAuth();
 
   const truncatedText =
     post.description.length > 60
@@ -42,7 +44,7 @@ const AllVolunteerPostCard = ({ post, isTable }) => {
     </div>
   );
   const CardView = () => (
-    <div className="card bg-base-100 shadow-sm hover:scale-105 duration-150 ease-in transition-transform">
+    <div className={`card ${theme === 'light'? "bg-base-100": "bg-gray-600"} shadow-sm hover:scale-105 duration-150 ease-in transition-transform`}>
       <figure>
         <img
           src={post.thumbnail}
@@ -72,7 +74,7 @@ const AllVolunteerPostCard = ({ post, isTable }) => {
         <div><p> Type: <span className="bg-blue-400 text-white px-1 rounded-full">{post?.type}</span></p></div>
 
         <div className="card-actions justify-between flex items-center">
-          <p className="bg-orange-200 py-1 px-1 max-w-fit rounded-full">
+          <p className="bg-orange-200 py-1 px-1 max-w-fit text-black rounded-full">
             Needed: {post.volunteersNeeded} People
           </p>
           <NavLink

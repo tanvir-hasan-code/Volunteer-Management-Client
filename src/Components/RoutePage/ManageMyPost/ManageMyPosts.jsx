@@ -12,7 +12,7 @@ const ManageMyPost = () => {
         className={({ isActive }) => {
           const active = isActive || location.pathname === "/manageMyPost";
           return `px-4 py-2 rounded-md transition duration-300 ${
-            active ? "text-blue-500 font-bold underline" : "hover:bg-gray-100 text-gray-700"
+            active ? "text-blue-500 font-bold underline" : "hover:bg-gray-100 "
           }`;
         }}
       >
@@ -27,7 +27,7 @@ const ManageMyPost = () => {
           `px-4 py-2 rounded-md transition duration-300 ${
             isActive
               ? "text-blue-500 font-bold underline"
-              : "hover:bg-gray-100 text-gray-700"
+              : "hover:bg-gray-100"
           }`
         }
       >

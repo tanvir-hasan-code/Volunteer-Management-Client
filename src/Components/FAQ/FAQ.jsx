@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const faqs = [
   {
@@ -19,6 +20,7 @@ const faqs = [
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const { theme } = useAuth();
 
   const toggleFAQ = (index, e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="bg-[#568F87] py-1 root-font">
+    <div className={`${theme === 'light'? "bg-[#568F87]": ""} py-1 root-font`}>
       <div className="w-full md:w-11/12 mx-auto my-12 px-5 md:px-0">
         <h2 className="text-3xl font-bold text-center mb-8 playfair-font text-white">
           Frequently Asked Questions
@@ -35,7 +37,7 @@ const FAQ = () => {
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              className="bg-white shadow rounded-lg p-4 cursor-pointer"
+              className={`${theme === "light"? "bg-white": "bg-gray-700"} shadow rounded-lg p-4 cursor-pointer`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
@@ -50,7 +52,7 @@ const FAQ = () => {
               <AnimatePresence>
                 {openIndex === index && (
                   <motion.p
-                    className="mt-2 text-gray-600"
+                    className={`mt-2 ${theme === "light"? "text-gray-600": "text-green-500"}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}

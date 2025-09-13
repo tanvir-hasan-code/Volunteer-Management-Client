@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 
 const PostDetailsPage = () => {
   useTitle("Details-page");
-  const { user } = useAuth();
+  const { user, theme } = useAuth();
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -103,7 +103,7 @@ const PostDetailsPage = () => {
         <IoArrowBack size={20} /> Back
       </button>
       <div className="min-h-screen flex items-center">
-        <div className="max-w-md h-fit mx-auto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col">
+        <div className={`max-w-md h-fit mx-auto ${theme === "light"? "bg-white": "bg-gray-700"} rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col`}>
           <img
             src={post.thumbnail}
             alt={post.title}
@@ -111,12 +111,12 @@ const PostDetailsPage = () => {
           />
 
           <div className="p-5 flex-1 flex flex-col">
-            <h2 className="text-xl font-bold text-gray-800 mb-2">
+            <h2 className={`${theme === 'light'? "text-gray-800": "text-white"} text-xl font-bold  mb-2`}>
               {post.title}
             </h2>
-            <p className="text-gray-600 text-sm mb-4">{post.description}</p>
+            <p className={`text-sm mb-4 ${theme === "light"? "text-gray-600": "text-gray-300"}`}>{post.description}</p>
 
-            <div className="space-y-2 text-sm text-gray-700">
+            <div className={`space-y-2 text-sm ${theme === "light"? "text-gray-700": ""}`}>
               <div className="flex items-center gap-2">
                 <User size={16} /> <span>{post.Organizer}</span>
               </div>
@@ -204,6 +204,8 @@ const PostDetailsPage = () => {
                     placeholder="Password"
                     readOnly
                   />
+                  <label className="label">Suggestion</label>
+                  <textarea name="suggestion" placeholder="Now Type Your Suggestion"></textarea>
                   <div className="flex mt-2 items-center justify-between">
                     <button
                       onClick={() => setIsModalShow(false)}

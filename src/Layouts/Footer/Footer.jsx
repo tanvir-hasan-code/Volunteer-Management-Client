@@ -2,10 +2,12 @@ import React from "react";
 import { FaPhoneAlt, FaServicestack } from "react-icons/fa";
 import { ImLocation } from "react-icons/im";
 import { MdAttachEmail } from "react-icons/md";
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const Footer = () => {
+  const { theme } = useAuth();
   return (
-	  <div className="bg-[#064232]">
+	  <div className={`${theme === "light"? "bg-[#064232]": "bg-gray-900"}`}>
 		  <footer className="footer text-white sm:footer-horizontal  text-base-content p-10 pb-5">
       <div className="items-center mx-auto md:mx-0">
         <img

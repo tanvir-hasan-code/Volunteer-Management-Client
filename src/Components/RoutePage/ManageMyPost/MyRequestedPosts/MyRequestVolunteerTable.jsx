@@ -2,10 +2,12 @@ import React, { use, useState } from "react";
 import useCancelRequestAPI from "../../../../API/useCancelRequestAPI";
 import Swal from "sweetalert2";
 import axios from "axios";
+import useAuth from "../../../../Hooks/Auth/useAuth";
 
 const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
 	const requestPost = use(myRequestVolunteer) || [];
-	const [request, setRequest] = useState(requestPost);
+  const [request, setRequest] = useState(requestPost);
+  const { theme } = useAuth();
 	const { cancelRequestPromise } = useCancelRequestAPI();
 
   const handleDeleteReq = (_id, postId) => {
@@ -54,7 +56,7 @@ const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
-          <thead>
+          <thead className={`${theme === 'light'? "": ""}`}>
             <tr>
               <th>No.</th>
               <th>INFO</th>
@@ -65,7 +67,7 @@ const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
           <tbody>
             {/* row 1 */}
             {request.map((req, i) => (
-              <tr key={req._id}>
+              <tr key={req._id} className={`${theme === 'light' ? '': ""}`}>
                 <td className="md:font-bold">{i + 1}</td>
                 <td>
                   <div className="flex items-center gap-3">

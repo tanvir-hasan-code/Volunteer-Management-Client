@@ -3,10 +3,12 @@ import React, { Suspense, useEffect, useState } from "react";
 import VolunteerNeedsNowCards from "./VolunteerNeedsNowCards";
 import { Typewriter } from "react-simple-typewriter";
 import { Link } from "react-router";
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const VolunteerNeedsNow = () => {
   const [needPost, setNeedPost] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { theme } = useAuth();
 
   useEffect(() => {
     setLoading(true);
@@ -17,11 +19,11 @@ const VolunteerNeedsNow = () => {
   }, []);
 
   if (loading) {
-    return <p className="bg-[#568F87] loading flex mx-auto"></p>;
+    return <p className={`${theme === 'light'? 'bg-[#568F87]': ""} loading flex mx-auto`}></p>;
   }
 
   return (
-    <div className="bg-[#568F87]">
+    <div className={`${theme === 'light'? "bg-[#568F87]": ""}`}>
       <div className="w-11/12 mx-auto">
         <h1 className="text-3xl text-white font-bold playfair-font text-center md:p-16 ">
           <Typewriter

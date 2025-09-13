@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const Action = () => {
+  const {theme} = useAuth()
   return (
-    <div className="bg-[#568F87] root-font px-5 md:px-0 py-5 root-font">
+    <div className={`${theme === 'light'? "bg-[#568F87]": ""} root-font px-5 md:px-0 py-5 root-font`}>
       <motion.div
-        className=" bg-blue-600 text-white py-12 mt-12 rounded-4xl text-center w-full drop-shadow-2xl lg:w-7/12 md:w-10/12 mx-auto md:rounded-tl-full md:rounded-br-full"
+        className={` ${theme === 'light'? "bg-blue-600": "bg-blue-950"} text-white py-12 mt-12 rounded-4xl text-center w-full drop-shadow-2xl lg:w-7/12 md:w-10/12 mx-auto md:rounded-tl-full md:rounded-br-full`}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

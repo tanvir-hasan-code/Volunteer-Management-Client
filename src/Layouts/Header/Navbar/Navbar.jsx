@@ -9,7 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import ThemeChange from "../../../Theme/ThemeChange";
 
 const Navbar = () => {
-  const { user, signOutUser } = useAuth();
+  const { user, signOutUser, theme } = useAuth();
  
 
   const NavbarOption = (
@@ -60,7 +60,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-[#FFF5F2] shadow-sm root-font lg:px-5">
+    <div className={`navbar ${theme === "light"? 'bg-[#FFF5F2]': "bg-gray-600"} shadow-sm root-font lg:px-5`}>
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -129,6 +129,7 @@ const Navbar = () => {
               <li>
                 <a className="text-blue-500">{user.email}</a>
               </li>
+              <div><ThemeChange /></div>
               <div>
                 <button
                   onClick={handleSignOut}
@@ -143,14 +144,16 @@ const Navbar = () => {
       ) : (
           <div className="navbar-end flex gap-3">
           <Link to={"/login"}>
-            <button className="btn btn-primary btn-sm md:btn-md">Login</button>
+            <button className="btn btn-primary btn-xs md:btn-md">Login</button>
           </Link>
           <Link to={"/register"}>
-            <button className="btn btn-success btn-sm md:btn-md">
+            <button className="btn btn-success btn-xs md:btn-md">
               Register
             </button>
           </Link>
-            <ThemeChange />
+            <div className="">
+              <ThemeChange />
+            </div>
         </div>
       )}
 

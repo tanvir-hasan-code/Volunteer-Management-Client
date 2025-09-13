@@ -1,4 +1,5 @@
 import CountUp from "react-countup";
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const stats = [
   {
@@ -74,8 +75,9 @@ const stats = [
 ];
 
 const Statistics = () => {
+  const { theme } = useAuth();
   return (
-    <div className="bg-[#568F87] py-1">
+    <div className={`${theme === 'light'? 'bg-[#568F87]': ""} py-1`}>
       <div className="w-full md:w-11/12 mx-auto my-12 text-center">
         <h2 className="text-3xl font-bold mb-8 playfair-font text-white">
           Our Impact
@@ -84,7 +86,7 @@ const Statistics = () => {
           {stats.map((stat) => (
             <div
               key={stat.id}
-              className="bg-blue-500 text-white p-6 rounded-xl shadow-lg min-w-[150px]"
+              className={`${theme === 'light'? "bg-blue-500": "bg-blue-900"} text-white p-6 rounded-xl shadow-lg min-w-[150px]`}
             >
               <img
                 className="flex mx-auto rounded-2xl border-1 w-14 h-14 "

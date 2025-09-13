@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const CallToAction = () => {
+  const { theme } = useAuth();
   const orgs = [
     {
       id: 1,
@@ -57,7 +59,7 @@ const CallToAction = () => {
   ];
 
   return (
-    <div className="bg-[#568F87] root-font px-5 md:px-0 py-5">
+    <div className={`${theme === 'light'? 'bg-[#568F87]': ""} root-font px-5 md:px-0 py-5`}>
       <div className="w-full md:w-11/12  mx-auto my-12 mt-0">
         <h2 className="text-3xl font-bold text-center mb-8 playfair-font text-white">
           <Typewriter
@@ -74,10 +76,10 @@ const CallToAction = () => {
           {orgs.map((org, i) => (
             <motion.div
               key={org.id}
-              className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-110 duration-150 ease-in transition-transform"
+              className={`${theme === 'light'? "bg-white": "bg-gray-700"} rounded-xl shadow-lg p-6 flex flex-col items-center hover:scale-110 duration-150 ease-in transition-transform`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: i * 0.2 }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
               viewport={{ once: true }}
             >
               <img

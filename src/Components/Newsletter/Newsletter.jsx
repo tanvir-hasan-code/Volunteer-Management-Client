@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const Newsletter = () => {
- 
+ const {theme } = useAuth()
 
   return (
-    <div className="bg-[#568F87] px-5 py-1 root-font">
+    <div className={`${theme === 'light'? "bg-[#568F87]": ""} px-5 py-1 root-font`}>
       <motion.div
-        className="w-full md:w-11/12 mx-auto my-12 bg-gradient-to-r from-blue-600 to-indigo-600 p-8 rounded-xl text-center"
+        className={`w-full md:w-11/12 mx-auto my-12 bg-gradient-to-r ${theme === "light"? "from-blue-600 to-indigo-600": "from-blue-900 to-indigo-900"} p-8 rounded-xl text-center`}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -22,7 +23,7 @@ const Newsletter = () => {
           <input
             type="email"
             placeholder="Enter your email"
-            className="p-3 rounded-lg flex-1 text-gray-900"
+            className={`p-3 rounded-lg flex-1 ${theme === 'light'? "text-gray-900": "text-white"}`}
           />
           <button
             type="submit"

@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { Typewriter } from 'react-simple-typewriter';
+import useAuth from "../../Hooks/Auth/useAuth";
 
 const VolunteerCategories = () => {
+  const {theme} = useAuth()
   const categories = [
     { id: 1, name: "Education", icon: "📚" },
     { id: 2, name: "Environment", icon: "🌱" },
@@ -10,7 +12,7 @@ const VolunteerCategories = () => {
   ];
 
   return (
-    <div className="bg-[#568F87] root-font px-3 md:px-0 pt-1 pb-3">
+    <div className={`${theme === 'light'? "bg-[#568F87]": ""} root-font px-3 md:px-0 pt-1 pb-3`}>
       <div className="w-full md:w-11/12 mx-auto my-12">
         <h2 className="text-3xl text-white playfair-font font-bold text-center mb-8">
           <Typewriter
@@ -27,7 +29,7 @@ const VolunteerCategories = () => {
           {categories.map((cat, i) => (
             <motion.div
               key={cat.id}
-              className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform"
+              className={`${theme === "light"? "bg-white": "bg-gray-700"} rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform`}
               initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: i * 0.2 }}
