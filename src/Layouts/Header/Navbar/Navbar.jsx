@@ -94,7 +94,7 @@ const Navbar = () => {
               src="https://i.ibb.co.com/DDnLCLmv/Screenshot-2.png"
               alt="Company-Logo"
             />
-            <span className="text-3xl font-extrabold text-blue-600 rotate-rgb">
+            <span className={`text-3xl font-extrabold ${theme === 'light' ? "text-blue-600": "text-blue-400"} rotate-rgb`}>
               ᐯOᒪᑌᑎIᖴY
             </span>
           </a>
