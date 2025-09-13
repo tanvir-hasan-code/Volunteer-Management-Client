@@ -16,7 +16,7 @@ const Events = () => {
   const { theme } = useAuth();
   return (
     <div className={`py-1 ${theme === "light"? "bg-[#568F87]": ""}`}>
-      <div className="w-full md:w-11/12 mx-auto root-font my-12">
+      <div className="w-11/12 mx-auto root-font my-12">
         <h2 className="text-3xl font-bold text-center mb-8 playfair-font text-white">
           Upcoming Events
         </h2>

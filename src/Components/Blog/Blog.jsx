@@ -28,7 +28,7 @@ const Blog = () => {
 
   return (
     <div className={`${theme === 'light'? "bg-[#568F87]": ""} root-font py-1`}>
-      <div className="w-full md:w-11/12 mx-auto my-12">
+      <div className="w-11/12 mx-auto my-12">
         <h2 className="text-3xl font-bold text-center mb-8 playfair-font text-white">Latest Articles</h2>
         <div className="flex flex-wrap justify-center gap-6">
           {blogs.map((b, i) => (
