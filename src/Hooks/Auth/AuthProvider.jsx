@@ -14,31 +14,29 @@ import axios from "axios";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState("light");
 
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
-    const toggleTheme = () => {
-    const newTheme = theme === 'light' ? "dark" : 'light';
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-    }
-  
-    useEffect(() => {
-    const saveTheme = localStorage.getItem('theme');
+  useEffect(() => {
+    const saveTheme = localStorage.getItem("theme");
     if (saveTheme) {
-      setTheme(saveTheme)
+      setTheme(saveTheme);
     }
-    }, [])
-  
-  
-    useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme)
-  }, [theme])
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   const provider = new GoogleAuthProvider();
 
   const signInWithGoogle = () => {
-   return signInWithPopup(auth, provider);
+    return signInWithPopup(auth, provider);
   };
 
   const createUser = (email, password) => {
@@ -48,10 +46,10 @@ const AuthProvider = ({ children }) => {
   const signInUsers = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
-	
-	const signOutUser = () => {
-		return signOut(auth);
-  }
+
+  const signOutUser = () => {
+    return signOut(auth);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -59,7 +57,7 @@ const AuthProvider = ({ children }) => {
       if (user?.email) {
         axios
           .post(
-            "http://localhost:3000/jwt",
+            "https://volunteer-management-server-7r6vgdbld.vercel.app/jwt",
             { email: user.email },
             {
               withCredentials: true,
@@ -80,10 +78,10 @@ const AuthProvider = ({ children }) => {
     signInUsers,
     signInWithGoogle,
     loading,
-	  setLoading,
+    setLoading,
     signOutUser,
-    theme, 
-    toggleTheme
+    theme,
+    toggleTheme,
   };
 
   if (loading) {

@@ -17,17 +17,21 @@ const MyCreatedPostList = ({ createdPost }) => {
   const [req, setReq] = useState([]);
   const [loading, setLoading] = useState(false);
   const reqModalOpen = (_id) => {
-    axios.get(`http://localhost:3000/request/${_id}`).then((res) => {
-      setReq(res.data);
-      setReqModal(true);
-    });
+    axios
+      .get(
+        `https://volunteer-management-server-7r6vgdbld.vercel.app/request/${_id}`
+      )
+      .then((res) => {
+        setReq(res.data);
+        setReqModal(true);
+      });
   };
 
   const openModal = async (_id) => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:3000/allVolunteerPosts/detailsPost/${_id}`
+        `https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts/detailsPost/${_id}`
       );
       setSelectPost(res.data);
       setIsModal(true);
@@ -54,13 +58,13 @@ const MyCreatedPostList = ({ createdPost }) => {
     try {
       setLoading(true);
       const res = await axios.put(
-        `http://localhost:3000/allVolunteerPosts/detailsPost/${selectPost._id}`,
+        `https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts/detailsPost/${selectPost._id}`,
         updateData
       );
 
       if (res.data.modifiedCount > 0) {
         const updatedRes = await axios.get(
-          `http://localhost:3000/allVolunteerPosts/detailsPost/${selectPost._id}`
+          `https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts/detailsPost/${selectPost._id}`
         );
         const updatedPost = updatedRes.data;
 
@@ -102,7 +106,9 @@ const MyCreatedPostList = ({ createdPost }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/manageMyPost/${_id}`)
+          .delete(
+            `https://volunteer-management-server-7r6vgdbld.vercel.app/manageMyPost/${_id}`
+          )
           .then((res) => {
             if (res.data.deletedCount) {
               Swal.fire({
@@ -129,9 +135,12 @@ const MyCreatedPostList = ({ createdPost }) => {
   const handleStatusChange = (e, _id) => {
     console.log(e.target.value, _id);
     axios
-      .patch(`http://localhost:3000/myCreatedPosts/${_id}`, {
-        status: e.target.value,
-      })
+      .patch(
+        `https://volunteer-management-server-7r6vgdbld.vercel.app/myCreatedPosts/${_id}`,
+        {
+          status: e.target.value,
+        }
+      )
       .then((res) => {
         if (res.data.modifiedCount) {
           Swal.fire({
@@ -185,7 +194,11 @@ const MyCreatedPostList = ({ createdPost }) => {
               post.map((p, i) => (
                 <tr
                   key={i}
-                  className={`${theme === "light"? "bg-white hover:bg-gray-100": "hover:bg-gray-900"} bg-gray-700 transition duration-200 text-sm md:text-base`}
+                  className={`${
+                    theme === "light"
+                      ? "bg-white hover:bg-gray-100"
+                      : "hover:bg-gray-900"
+                  } bg-gray-700 transition duration-200 text-sm md:text-base`}
                 >
                   <td>{i + 1}.</td>
                   <td className="p-3 text-center">{p?.title}</td>

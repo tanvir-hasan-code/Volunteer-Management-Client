@@ -3,7 +3,7 @@ import React from "react";
 import useAuth from "../Auth/useAuth";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://volunteer-management-server-7r6vgdbld.vercel.app",
 });
 
 const useAxiosSecure = () => {
@@ -13,7 +13,7 @@ const useAxiosSecure = () => {
     (config) => {
       if (user?.accessToken) {
         config.headers.authorization = `Bearer ${user.accessToken}`;
-    }
+      }
       return config;
     },
     (error) => {

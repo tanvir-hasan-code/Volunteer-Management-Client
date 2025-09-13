@@ -24,7 +24,9 @@ const AllVolunteerPosts = () => {
   useEffect(() => {
     if (keyWordQuarry.trim() !== "") {
       axios
-        .get(`http://localhost:3000/search?q=${keyWordQuarry}`)
+        .get(
+          `https://volunteer-management-server-7r6vgdbld.vercel.app/search?q=${keyWordQuarry}`
+        )
         .then((res) => setResults(res.data))
         .catch((err) => console.log("Search Error:", err));
     } else {
@@ -34,7 +36,9 @@ const AllVolunteerPosts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/allVolunteerPosts")
+      .get(
+        "https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts"
+      )
       .then((res) => {
         setVolunteerPost(res.data);
         setLoading(false);
@@ -65,7 +69,7 @@ const AllVolunteerPosts = () => {
   };
 
   return (
-    <div className={`${theme === "light"? "bg-[#568F87]": ""}`}>
+    <div className={`${theme === "light" ? "bg-[#568F87]" : ""}`}>
       <h1 className="text-2xl lg:text-3xl text-center playfair-font pt-4 md:pt-5  text-white font-bold">
         All Volunteer Need Post
       </h1>
@@ -90,7 +94,7 @@ const AllVolunteerPosts = () => {
               </g>
             </svg>
             <input
-              className={`${theme === 'light'? "": ""}`}
+              className={`${theme === "light" ? "" : ""}`}
               type="search"
               required
               placeholder="Search volunteers..."
@@ -100,11 +104,15 @@ const AllVolunteerPosts = () => {
           </label>
         </div>
         {/* Table and Grid  */}
-        <div className={`flex gap-3 ${theme === 'light'? "bg-white": "bg-gray-400"}  w-fit px-3 py-2 rounded-full`}>
+        <div
+          className={`flex gap-3 ${
+            theme === "light" ? "bg-white" : "bg-gray-400"
+          }  w-fit px-3 py-2 rounded-full`}
+        >
           <button
             className={`${
               isTable ? "" : "bg-gray-500 text-white p-1 rounded-3xl"
-            } ${theme === 'light' || isTable? "": " bg-gray-900"}`}
+            } ${theme === "light" || isTable ? "" : " bg-gray-900"}`}
             onClick={handleGridClick}
           >
             <Grid3x3 size={20} />
@@ -112,7 +120,7 @@ const AllVolunteerPosts = () => {
           <button
             className={`${
               !isTable ? "" : "bg-gray-500 text-white p-1 rounded-3xl"
-            } ${theme === 'light' || !isTable? "": " bg-gray-900"}`}
+            } ${theme === "light" || !isTable ? "" : " bg-gray-900"}`}
             onClick={handleTableClick}
           >
             <LucideTableOfContents size={20} />

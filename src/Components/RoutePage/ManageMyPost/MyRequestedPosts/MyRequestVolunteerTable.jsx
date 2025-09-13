@@ -5,10 +5,10 @@ import axios from "axios";
 import useAuth from "../../../../Hooks/Auth/useAuth";
 
 const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
-	const requestPost = use(myRequestVolunteer) || [];
+  const requestPost = use(myRequestVolunteer) || [];
   const [request, setRequest] = useState(requestPost);
   const { theme } = useAuth();
-	const { cancelRequestPromise } = useCancelRequestAPI();
+  const { cancelRequestPromise } = useCancelRequestAPI();
 
   const handleDeleteReq = (_id, postId) => {
     Swal.fire({
@@ -23,16 +23,21 @@ const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
       if (result.isConfirmed) {
         cancelRequestPromise(_id)
           .then((res) => {
-			  if (res?.data?.deletedCount) {
-				  const remainder = request.filter(p => p._id !== _id);
-				  setRequest(remainder);
+            if (res?.data?.deletedCount) {
+              const remainder = request.filter((p) => p._id !== _id);
+              setRequest(remainder);
 
-				  axios.patch(`http://localhost:3000/updateRequestCount/${postId}`).then(res => res.data).catch(err => console.log(err))
+              axios
+                .patch(
+                  `https://volunteer-management-server-7r6vgdbld.vercel.app/updateRequestCount/${postId}`
+                )
+                .then((res) => res.data)
+                .catch((err) => console.log(err));
 
               Swal.fire({
                 title: "Deleted!",
-				  text: "Your Post has been deleted.",
-				showConfirmButton: false,
+                text: "Your Post has been deleted.",
+                showConfirmButton: false,
                 icon: "success",
               });
             }
@@ -42,8 +47,8 @@ const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
               Swal.fire({
                 title: "Fail!",
                 text: "Your Request has been delete Fail!.",
-				  icon: "error",
-				showConfirmButton: false,
+                icon: "error",
+                showConfirmButton: false,
               });
             }
           });
@@ -56,7 +61,7 @@ const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
-          <thead className={`${theme === 'light'? "": ""}`}>
+          <thead className={`${theme === "light" ? "" : ""}`}>
             <tr>
               <th>No.</th>
               <th>INFO</th>
@@ -67,7 +72,7 @@ const MyRequestVolunteerTable = ({ myRequestVolunteer }) => {
           <tbody>
             {/* row 1 */}
             {request.map((req, i) => (
-              <tr key={req._id} className={`${theme === 'light' ? '': ""}`}>
+              <tr key={req._id} className={`${theme === "light" ? "" : ""}`}>
                 <td className="md:font-bold">{i + 1}</td>
                 <td>
                   <div className="flex items-center gap-3">

@@ -14,10 +14,15 @@ const AddVolunteerPost = () => {
     const formData = new FormData(form);
     const newNeedVolunteer = Object.fromEntries(formData.entries());
     newNeedVolunteer.post_owner = user.email;
-    newNeedVolunteer.volunteersNeeded = Number(newNeedVolunteer.volunteersNeeded);
+    newNeedVolunteer.volunteersNeeded = Number(
+      newNeedVolunteer.volunteersNeeded
+    );
 
     axios
-      .post("http://localhost:3000/addVolunteerPost", newNeedVolunteer)
+      .post(
+        "https://volunteer-management-server-7r6vgdbld.vercel.app/addVolunteerPost",
+        newNeedVolunteer
+      )
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({
@@ -27,7 +32,7 @@ const AddVolunteerPost = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          form.reset()
+          form.reset();
         }
       })
       .catch((error) => {

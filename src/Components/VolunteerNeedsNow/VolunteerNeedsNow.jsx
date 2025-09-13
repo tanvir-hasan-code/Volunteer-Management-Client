@@ -12,18 +12,28 @@ const VolunteerNeedsNow = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:3000/needsNow-post").then((res) => {
-      setNeedPost(res.data);
-      setLoading(false);
-    });
+    axios
+      .get(
+        "https://volunteer-management-server-7r6vgdbld.vercel.app/needsNow-post"
+      )
+      .then((res) => {
+        setNeedPost(res.data);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
-    return <p className={`${theme === 'light'? 'bg-[#568F87]': ""} loading flex mx-auto`}></p>;
+    return (
+      <p
+        className={`${
+          theme === "light" ? "bg-[#568F87]" : ""
+        } loading flex mx-auto`}
+      ></p>
+    );
   }
 
   return (
-    <div className={`${theme === 'light'? "bg-[#568F87]": ""}`}>
+    <div className={`${theme === "light" ? "bg-[#568F87]" : ""}`}>
       <div className="w-11/12 mx-auto">
         <h1 className="text-3xl text-white font-bold playfair-font text-center md:p-16 ">
           <Typewriter
@@ -40,9 +50,14 @@ const VolunteerNeedsNow = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 py-8">
           {needPost.map((post, i) => (
             <VolunteerNeedsNowCards key={i} post={post} />
-		  ))}
+          ))}
         </div>
-			<Link to={`/allVolunteerPosts`} className="btn btn-primary rounded-full w-5/12 mx-auto flex ">See All</Link>
+        <Link
+          to={`/allVolunteerPosts`}
+          className="btn btn-primary rounded-full w-5/12 mx-auto flex "
+        >
+          See All
+        </Link>
       </div>
     </div>
   );
