@@ -25,7 +25,7 @@ const AllVolunteerPosts = () => {
     if (keyWordQuarry.trim() !== "") {
       axios
         .get(
-          `https://volunteer-management-server-7r6vgdbld.vercel.app/search?q=${keyWordQuarry}`
+          `https://volunteer-management-server-kappa.vercel.app/search?q=${keyWordQuarry}`
         )
         .then((res) => setResults(res.data))
         .catch((err) => console.log("Search Error:", err));
@@ -37,7 +37,7 @@ const AllVolunteerPosts = () => {
   useEffect(() => {
     axios
       .get(
-        "https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts"
+        "https://volunteer-management-server-kappa.vercel.app/allVolunteerPosts"
       )
       .then((res) => {
         setVolunteerPost(res.data);

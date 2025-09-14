@@ -13,12 +13,13 @@ const VolunteerNeedsNow = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(
-        "https://volunteer-management-server-7r6vgdbld.vercel.app/needsNow-post"
-      )
+      .get("https://volunteer-management-server-kappa.vercel.app/needsNow-post")
       .then((res) => {
         setNeedPost(res.data);
         setLoading(false);
+      })
+      .catch((err) => {
+        console.log("Data Load Not Found", err);
       });
   }, []);
 

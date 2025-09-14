@@ -23,7 +23,7 @@ const PostDetailsPage = () => {
     setLoading(true);
     axios
       .get(
-        `https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts/detailsPost/${id}`
+        `https://volunteer-management-server-kappa.vercel.app/allVolunteerPosts/detailsPost/${id}`
       )
       .then((res) => {
         setPost(res.data);
@@ -46,7 +46,7 @@ const PostDetailsPage = () => {
     try {
       setLoading(true);
       const requestRes = await axios.post(
-        `https://volunteer-management-server-7r6vgdbld.vercel.app/volunteerRequest`,
+        `https://volunteer-management-server-kappa.vercel.app/volunteerRequest`,
         reqData
       );
 
@@ -54,7 +54,7 @@ const PostDetailsPage = () => {
         setIsModalShow(false);
 
         const patchRes = await axios.patch(
-          `https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts/detailsPost/${postId}`
+          `https://volunteer-management-server-kappa.vercel.app/allVolunteerPosts/detailsPost/${postId}`
         );
 
         setRefresh((prev) => !prev);

@@ -63,7 +63,7 @@ const Navbar = () => {
     <div className={`navbar ${theme === "light"? 'bg-[#FFF5F2]': "bg-gray-600"} shadow-sm root-font lg:px-5`}>
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="btn pr-0 md:pr-4 btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -94,7 +94,7 @@ const Navbar = () => {
               src="https://i.ibb.co.com/DDnLCLmv/Screenshot-2.png"
               alt="Company-Logo"
             />
-            <span className={`text-3xl font-extrabold ${theme === 'light' ? "text-blue-600": "text-blue-400"} rotate-rgb`}>
+            <span className={`${user ? "text-3xl md:text-3xl": "text-2xl md:text-3xl"} font-extrabold ${theme === 'light' ? "text-blue-600": "text-blue-400"} rotate-rgb`}>
               ᐯOᒪᑌᑎIᖴY
             </span>
           </a>

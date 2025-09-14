@@ -13,7 +13,7 @@ const ManageMyPost = () => {
           const active = isActive || location.pathname === "/manageMyPost";
           return `px-4 py-2 rounded-md transition duration-300 ${
             active ? "text-blue-500 font-bold underline" : "hover:bg-gray-100 "
-          }`;
+          } text-xs md:text-sm`;
         }}
       >
         My Created Posts
@@ -26,9 +26,9 @@ const ManageMyPost = () => {
         className={({ isActive }) =>
           `px-4 py-2 rounded-md transition duration-300 ${
             isActive
-              ? "text-blue-500 font-bold underline"
+              ? "text-blue-500 font-bold underline "
               : "hover:bg-gray-100"
-          }`
+          } text-xs md:text-sm` 
         }
       >
         My Requested Posts

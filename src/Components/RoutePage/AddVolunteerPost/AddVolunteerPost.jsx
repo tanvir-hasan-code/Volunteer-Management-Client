@@ -20,7 +20,7 @@ const AddVolunteerPost = () => {
 
     axios
       .post(
-        "https://volunteer-management-server-7r6vgdbld.vercel.app/addVolunteerPost",
+        "https://volunteer-management-server-kappa.vercel.app/addVolunteerPost",
         newNeedVolunteer
       )
       .then((res) => {

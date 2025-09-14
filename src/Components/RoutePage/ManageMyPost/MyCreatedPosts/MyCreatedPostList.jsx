@@ -19,7 +19,7 @@ const MyCreatedPostList = ({ createdPost }) => {
   const reqModalOpen = (_id) => {
     axios
       .get(
-        `https://volunteer-management-server-7r6vgdbld.vercel.app/request/${_id}`
+        `https://volunteer-management-server-kappa.vercel.app/request/${_id}`
       )
       .then((res) => {
         setReq(res.data);
@@ -31,7 +31,7 @@ const MyCreatedPostList = ({ createdPost }) => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts/detailsPost/${_id}`
+        `https://volunteer-management-server-kappa.vercel.app/allVolunteerPosts/detailsPost/${_id}`
       );
       setSelectPost(res.data);
       setIsModal(true);
@@ -58,13 +58,13 @@ const MyCreatedPostList = ({ createdPost }) => {
     try {
       setLoading(true);
       const res = await axios.put(
-        `https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts/detailsPost/${selectPost._id}`,
+        `https://volunteer-management-server-kappa.vercel.app/allVolunteerPosts/detailsPost/${selectPost._id}`,
         updateData
       );
 
       if (res.data.modifiedCount > 0) {
         const updatedRes = await axios.get(
-          `https://volunteer-management-server-7r6vgdbld.vercel.app/allVolunteerPosts/detailsPost/${selectPost._id}`
+          `https://volunteer-management-server-kappa.vercel.app/allVolunteerPosts/detailsPost/${selectPost._id}`
         );
         const updatedPost = updatedRes.data;
 
@@ -107,7 +107,7 @@ const MyCreatedPostList = ({ createdPost }) => {
       if (result.isConfirmed) {
         axios
           .delete(
-            `https://volunteer-management-server-7r6vgdbld.vercel.app/manageMyPost/${_id}`
+            `https://volunteer-management-server-kappa.vercel.app/manageMyPost/${_id}`
           )
           .then((res) => {
             if (res.data.deletedCount) {
@@ -136,7 +136,7 @@ const MyCreatedPostList = ({ createdPost }) => {
     console.log(e.target.value, _id);
     axios
       .patch(
-        `https://volunteer-management-server-7r6vgdbld.vercel.app/myCreatedPosts/${_id}`,
+        `https://volunteer-management-server-kappa.vercel.app/myCreatedPosts/${_id}`,
         {
           status: e.target.value,
         }
